@@ -1,1 +1,1 @@
-Directory where an environment should be stored
+Directory where compiled environment should be stored
