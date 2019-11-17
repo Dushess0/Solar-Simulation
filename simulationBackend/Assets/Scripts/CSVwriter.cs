@@ -1,35 +1,41 @@
-﻿using System;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 using System.Collections.Generic;
-/* Library that should work with csv
 using CsvHelper;
-*/
-using Unity;
-using UnityEngine;
+using System.Linq;
+using System;
 
-namespace CsvWriter
-{
+namespace CSVWriter{
+	
     public class DataRow
     {
-        private byte[] firstCamera;
-        private byte[] secondCamera;
-        private byte[] thirdCamera;
+        private byte[] firstCamera =  Enumerable.Repeat((byte)0x20, 1000 ).ToArray();
+        private byte[] secondCamera =  Enumerable.Repeat((byte)0x20, 1000).ToArray();
+        private byte[] thirdCamera =  Enumerable.Repeat((byte)0x20, 1000).ToArray();
         private List<Vector3> lidarData;
-        // private List<int[][][]> lidarData; Is it a better way ??
         private List<Vector3> ultrasoundData;
-        private float[] engines_state;  // two floats indicating state of each engine
+        // two floats indicating state of each engine
+        private float leftEngine;  
+        private float rightEngine;
         
-        // assuming we will obtain sth similat to that https://www.electronicshub.org/wp-content/uploads/2018/06/Arduino-Radar-Project-Processing-Output.jpg 
-        
-        internal DataRow(byte[] fC, byte[] sC, byte[] tC,List<Vector3> lData, List<Vector3> uData,float[] engines_state )
+		public static void Main(){
+			 Console.WriteLine("DataRow");
+		}
+		
+        public byte[] FirstCamera
+		{
+ 			 get { return this.firstCamera; }
+  			 set { this.firstCamera = value; }
+		}
+		
+        internal DataRow(byte[] fC, byte[] sC, byte[] tC,List<Vector3> lData, List<Vector3> uData,float[] engine_state )
         {
-            firstCamera = fC;
-            secondCamera = sC;
-            thirdCamera = tC;
+            this.firstCamera = fC;
+            this.secondCamera = sC;
+            this.thirdCamera = tC;
             lidarData = lData;
             ultrasoundData = uData;
-            this.engines_state = engines_state;
+            this.leftEngine = engine_state[0];
+			this.rightEngine = engine_state[1];
         }        
     };
 
@@ -37,16 +43,14 @@ namespace CsvWriter
     {
         private string csvFileName;
         private List<DataRow> records = new List<DataRow>();
-
-        public static void Main()
-        {
-            
-            //using (var writer = new StreamWriter("path\\to\\file.csv"));
-            // using (var csv = new CsvWriter(writer));
-           // {
-                /* redefine this method to make it save images on disk and wrtie path to that images to csv */
-                // csv.WriteRecords(records);
-            //}
+		
+			
+        public void write(){
+				  using (var writer = new StreamWriter("/data/data_set.csv"))
+    			  using (var csv = new CsvWriter(writer))
+    			 {
+        			csv.WriteRecords(records);
+    			}    
         }
 
         public void addRecord(byte[] fC, byte[] sC, byte[] tC,List<Vector3> lData, List<Vector3> uData,float[] eng_data)
@@ -54,8 +58,7 @@ namespace CsvWriter
             records.Add(new DataRow(fC,sC,tC,lData,uData,eng_data)); 
         }
     }
-    
-    
+     
 }
 
 
