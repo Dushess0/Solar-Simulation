@@ -80,15 +80,13 @@ public class LidarSensor : MonoBehaviour
             Debug.DrawLine(LaserRays[i].origin,LaserRays[i].origin+ LaserRays[i].direction * Magnitude, Color.red); 
             if (Physics.Raycast(LaserRays[i],out hit,Magnitude)) //4 is layer mask, 4 is used for water
             {
-                row[i] = hit.distance;
+                row[i] = hit.distance;               
                 
-                Debug.Log("hit");
                 Debug.DrawLine(LaserRays[i].origin, LaserRays[i].origin + LaserRays[i].direction * Magnitude, Color.green);
-
-            }
-                
+            }               
         }
         Data.Add(row);
+        
     }
 
     void OnDrawGizmosSelected()

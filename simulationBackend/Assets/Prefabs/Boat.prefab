@@ -680,6 +680,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3169732392146945577}
+  - component: {fileID: 5714786804514036884}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -706,6 +707,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5714786804514036884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3453334288907040295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1be347e6e8965a14294af61cefbe9d23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Recording: 0
+  SavingPath: /data
+  lidar: {fileID: 6639388660543994852}
+  Cameras:
+  - {fileID: 3028608371130482138}
+  - {fileID: 3758187490811709393}
+  - {fileID: 7491958752573078052}
 --- !u!1 &4768803759444931404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,6 +1232,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1006058054738539316}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &3758187490811709393 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4166392485099762917, guid: 8045b1c0e0fb6e34ba59e2c64300749b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1006058054738539316}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1429392193331382591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1314,6 +1340,12 @@ PrefabInstance:
 --- !u!4 &4627016146262010147 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6043916513105829916, guid: 8045b1c0e0fb6e34ba59e2c64300749b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1429392193331382591}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &3028608371130482138 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4166392485099762917, guid: 8045b1c0e0fb6e34ba59e2c64300749b,
     type: 3}
   m_PrefabInstance: {fileID: 1429392193331382591}
   m_PrefabAsset: {fileID: 0}
@@ -1424,6 +1456,12 @@ PrefabInstance:
 --- !u!4 &993458394714025693 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6043916513105829916, guid: 8045b1c0e0fb6e34ba59e2c64300749b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6785014986797567681}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &7491958752573078052 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4166392485099762917, guid: 8045b1c0e0fb6e34ba59e2c64300749b,
     type: 3}
   m_PrefabInstance: {fileID: 6785014986797567681}
   m_PrefabAsset: {fileID: 0}
