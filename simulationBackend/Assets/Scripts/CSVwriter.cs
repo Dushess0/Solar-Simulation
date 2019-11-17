@@ -1,24 +1,29 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
 /* Library that should work with csv
 using CsvHelper;
 */
-using System.Windows.Media.Media3D;
-using System.Windows.Media.Media2D;
+using Unity;
+using UnityEngine;
+
 namespace CsvWriter
 {
-    public class DataRow{
-        private Image firstCamera {get; set;}
-        private Image secondCamera {get; set;}
-        private Image thirdCamera {get; set;}
-        private List<Vector3D> lidarData = List<Vector3D>();
+    public class DataRow
+    {
+        private byte[] firstCamera;
+        private byte[] secondCamera;
+        private byte[] thirdCamera;
+        private List<Vector3> lidarData;
         // private List<int[][][]> lidarData; Is it a better way ??
-        private List<Vector2D> ultrasoundData = List<Vector2D>(); 
+        private List<Vector3> ultrasoundData;
+        
         // assuming we will obtain sth similat to that https://www.electronicshub.org/wp-content/uploads/2018/06/Arduino-Radar-Project-Processing-Output.jpg 
         
-        DataRow(string filename, Image fC,Image sC, Image tC,List<Vector3D> lData, List<Vector2D> uData ){
-            firstCamera = fc;
+        internal DataRow(byte[] fC, byte[] sC, byte[] tC,List<Vector3> lData, List<Vector3> uData )
+        {
+            firstCamera = fC;
             secondCamera = sC;
             thirdCamera = tC;
             lidarData = lData;
@@ -27,10 +32,11 @@ namespace CsvWriter
     };
 
     public class Writer{
-        private string csvFileName { get; set; }
+        private string csvFileName;
         private List<DataRow> records = new List<DataRow>();
 
-        public static void Main(){
+        public static void Main()
+        {
             
             //using (var writer = new StreamWriter("path\\to\\file.csv"));
             // using (var csv = new CsvWriter(writer));
@@ -40,7 +46,8 @@ namespace CsvWriter
             //}
         }
 
-        public void addRecord(Image fC,Image sC, Image tC,List<Vector3D> lData, List<Vector2D> uData){
+        public void addRecord(byte[] fC, byte[] sC, byte[] tC,List<Vector3> lData, List<Vector3> uData)
+        {
             records.Add(new DataRow(fC,sC,tC,lData,uData)); 
         }
     }
