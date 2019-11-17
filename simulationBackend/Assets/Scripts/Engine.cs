@@ -8,14 +8,14 @@ public class Engine : MonoBehaviour
 
     public float MaxPower = 10;
     public float Control=0;
-    Rigidbody rigidbody;
+    Rigidbody rBody;
     void Start()
     {
-        rigidbody = this.GetComponent<Rigidbody>();
+        rBody = this.GetComponent<Rigidbody>();
     }
     public void Step()
     {
-        rigidbody.AddRelativeForce(new Vector3(0, 0, -Control * MaxPower));
+        rBody.AddRelativeForce(new Vector3(0, 0, -Control * MaxPower));
     }
   
     

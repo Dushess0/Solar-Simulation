@@ -18,20 +18,23 @@ namespace CsvWriter
         private List<Vector3> lidarData;
         // private List<int[][][]> lidarData; Is it a better way ??
         private List<Vector3> ultrasoundData;
+        private float[] engines_state;  // two floats indicating state of each engine
         
         // assuming we will obtain sth similat to that https://www.electronicshub.org/wp-content/uploads/2018/06/Arduino-Radar-Project-Processing-Output.jpg 
         
-        internal DataRow(byte[] fC, byte[] sC, byte[] tC,List<Vector3> lData, List<Vector3> uData )
+        internal DataRow(byte[] fC, byte[] sC, byte[] tC,List<Vector3> lData, List<Vector3> uData,float[] engines_state )
         {
             firstCamera = fC;
             secondCamera = sC;
             thirdCamera = tC;
             lidarData = lData;
             ultrasoundData = uData;
+            this.engines_state = engines_state;
         }        
     };
 
-    public class Writer{
+    public class Writer
+    {
         private string csvFileName;
         private List<DataRow> records = new List<DataRow>();
 
@@ -46,9 +49,9 @@ namespace CsvWriter
             //}
         }
 
-        public void addRecord(byte[] fC, byte[] sC, byte[] tC,List<Vector3> lData, List<Vector3> uData)
+        public void addRecord(byte[] fC, byte[] sC, byte[] tC,List<Vector3> lData, List<Vector3> uData,float[] eng_data)
         {
-            records.Add(new DataRow(fC,sC,tC,lData,uData)); 
+            records.Add(new DataRow(fC,sC,tC,lData,uData,eng_data)); 
         }
     }
     

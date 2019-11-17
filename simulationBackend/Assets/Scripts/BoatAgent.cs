@@ -15,9 +15,9 @@ public class BoatAgent : Agent
     void Start()
     {
         StartPos = boat.transform.position;
-        Rbody = gameObject.GetComponent<Rigidbody>();
-        LeftEngine = GetComponentsInChildren<Engine>()[0];
-        RightEngine = GetComponentsInChildren<Engine>()[1];
+        Rbody = boat.GetComponent<Rigidbody>();
+        LeftEngine = boat.GetComponentsInChildren<Engine>()[0];
+        RightEngine = boat.GetComponentsInChildren<Engine>()[1];
         Done = false;
         Reward = 0;
 
