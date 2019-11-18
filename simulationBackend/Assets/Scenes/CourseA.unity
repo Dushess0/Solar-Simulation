@@ -3211,11 +3211,6 @@ PrefabInstance:
       propertyPath: RotationSpeed
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6639388660543994852, guid: 631f68ad8757ae74ea1b69f239c50173,
-        type: 3}
-      propertyPath: Debugging
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1002551333675655559, guid: 631f68ad8757ae74ea1b69f239c50173, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 631f68ad8757ae74ea1b69f239c50173, type: 3}

@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using CSVWriter;
+using System.Linq;
 public class DataRecorder : MonoBehaviour
 {
     public bool Recording;
@@ -26,7 +27,18 @@ public class DataRecorder : MonoBehaviour
             }
            if (Recording)
             {
+                Debug.Log("Recording ended");
                 Recording = false;
+                Writer writer = new Writer();
+                var a = Enumerable.Repeat((byte)0x20, 5).ToArray();
+                var b = new List<Vector3>();
+                var d = new List<Vector2>();
+                var c = new float[] { 5,5};
+                
+                writer.addRecord(a, a, a,b , d,c );
+                writer.write();
+
+               
                 
 
             }
