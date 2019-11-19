@@ -8,4 +8,7 @@ Simulation for training neural network.
 4) Python integration testing
 5) Polishing physics and collisions
 6) To be defined...
-(screenshot)[https://imgur.com/a/22Lja1C] 
+
+
+
+![screenshot](https://i.imgur.com/llaopUN.png "Some alpha screenshots")
