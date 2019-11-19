@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 6518887478935331933}
   - component: {fileID: 1809815443497148533}
   - component: {fileID: 9067203979373240913}
-  - component: {fileID: 6911432781303492287}
+  - component: {fileID: 4012699692204062642}
+  - component: {fileID: -3781769712923012623}
   m_Layer: 0
-  m_Name: Boui
+  m_Name: RedBoui
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,8 +80,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &6911432781303492287
-SphereCollider:
+--- !u!136 &4012699692204062642
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -89,6 +90,19 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
+  m_Height: 3
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3781769712923012623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2383269784429882717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9787d26d49d94514f8e3d63c00cf7593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

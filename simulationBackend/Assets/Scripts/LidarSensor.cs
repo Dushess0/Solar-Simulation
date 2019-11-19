@@ -25,7 +25,7 @@ public class LidarSensor : MonoBehaviour
 
     Ray[] LaserRays;
     float[] LaserAngles;
-    public List<float[]> Data;
+    public List<Vector3[]> Data;
     [Tooltip("Enable rays and hits in editor but disable collecting data !!!! ")]
     public bool Debugging;
     public float  Magnitude;
@@ -42,7 +42,7 @@ public class LidarSensor : MonoBehaviour
 
     void Awake()
     {
-        Data = new List<float[]>();      
+        Data = new List<Vector3[]>();      
         LaserRays = new Ray[LasersCount];
         LaserAngles = new float[LasersCount];
         for (int i = 0; i < LasersCount; i++)
@@ -73,19 +73,27 @@ public class LidarSensor : MonoBehaviour
     }
     void DetectCollisions()
     {
-        float[] row = new float[LasersCount];
+        Vector3[] row = new Vector3[LasersCount];
         for (int i = 0; i < LasersCount; i++)
         {
             RaycastHit hit;
-            Debug.DrawLine(LaserRays[i].origin,LaserRays[i].origin+ LaserRays[i].direction * Magnitude, Color.red); 
+           
             if (Physics.Raycast(LaserRays[i],out hit,Magnitude)) //4 is layer mask, 4 is used for water
             {
-                row[i] = hit.distance;               
+                row[i] =LaserRays[i].direction*Magnitude;
                 
+                
+                Debug.DrawLine(LaserRays[i].origin, LaserRays[i].origin + LaserRays[i].direction * Magnitude, Color.red);
+            }     
+            else
+            {
                 Debug.DrawLine(LaserRays[i].origin, LaserRays[i].origin + LaserRays[i].direction * Magnitude, Color.green);
-            }               
+                row[i] = Vector3.zero;
+            }
+                
         }
         Data.Add(row);
+        
         
     }
 

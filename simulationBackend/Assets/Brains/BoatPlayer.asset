@@ -20,6 +20,12 @@ MonoBehaviour:
     - width: 84
       height: 84
       blackAndWhite: 0
+    - width: 84
+      height: 84
+      blackAndWhite: 0
+    - width: 84
+      height: 84
+      blackAndWhite: 0
     vectorActionDescriptions:
     - 
     - 

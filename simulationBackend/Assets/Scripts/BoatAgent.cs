@@ -7,7 +7,9 @@ public class BoatAgent : Agent
     public GameObject boat;
     Rigidbody Rbody;
     Vector3 StartPos;
+    [SerializeField]
     Engine LeftEngine;
+    [SerializeField]
     Engine RightEngine;
     public bool Done;
     public float Reward;
@@ -16,8 +18,7 @@ public class BoatAgent : Agent
     {
         StartPos = boat.transform.position;
         Rbody = boat.GetComponent<Rigidbody>();
-        LeftEngine = boat.GetComponentsInChildren<Engine>()[0];
-        RightEngine = boat.GetComponentsInChildren<Engine>()[1];
+       
         Done = false;
         Reward = 0;
 
@@ -42,7 +43,8 @@ public class BoatAgent : Agent
         RightEngine.Control = vectorAction[1];
         LeftEngine.Step();
         RightEngine.Step();
-        Debug.Log(vectorAction[0]);
+        
+        
 
         if (Done)
         {

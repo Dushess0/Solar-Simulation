@@ -19,23 +19,19 @@ public class DataRecorder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.R))
-        {   if (!Recording)
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Recording = !Recording;
+            if (Recording)
             {
-                Recording = true;
+                
                 Debug.Log("Recording started");
             }
-           if (Recording)
+           if (!Recording)
             {
                 Debug.Log("Recording ended");
                 Recording = false;
-                Writer writer = new Writer();
-                var a = Enumerable.Repeat((byte)0x20, 5).ToArray();
-                var b = new List<Vector3>();
-                var d = new List<Vector2>();
-                var c = new float[] { 5,5};
-                
-                writer.addRecord(a, a, a,b , d,c );
+                Writer writer = new Writer(); 
                 writer.write();
 
                

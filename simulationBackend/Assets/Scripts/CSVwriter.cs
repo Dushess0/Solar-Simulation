@@ -89,7 +89,7 @@ namespace CSVWriter{
         }
 
         public void addRecord(byte[] fC, byte[] sC, byte[] tC,List<Vector3> lData, List<Vector2> uData,float[] eng_data)
-        {
+        { 
             records.Add(new DataRow(fC,sC,tC,lData,uData,eng_data)); 
         }
     }
