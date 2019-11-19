@@ -9,9 +9,10 @@ public class DataRecorder : MonoBehaviour
     public string SavingPath="/data";
 
     public LidarSensor lidar;
-    public Camera[] Cameras;
+    Camera[] Cameras;
+  
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         
     }
@@ -24,18 +25,30 @@ public class DataRecorder : MonoBehaviour
             Recording = !Recording;
             if (Recording)
             {
-                
+                lidar.Recording = true;
                 Debug.Log("Recording started");
             }
            if (!Recording)
             {
+                lidar.Recording = false;
+                
                 Debug.Log("Recording ended");
                 Recording = false;
-                Writer writer = new Writer(); 
+                Debug.Log(lidar.Data);
+                Writer writer = new Writer();
+                foreach (var item in lidar.Data)
+                {
+                    writer.addRecord(new byte[4], new byte[8], new byte[12], item, new List<Vector2>(), new float[] { 0,0});
+                }
                 writer.write();
 
-               
-                
+
+
+                lidar.ClearData();
+
+
+
+
 
             }
            

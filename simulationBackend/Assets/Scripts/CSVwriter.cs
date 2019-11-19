@@ -34,6 +34,7 @@ namespace CSVWriter{
  			 get { return this.firstCamera; }
   			 set { this.firstCamera = value; }
 		}
+      
         public byte[] SecondCamera
         {
             get { return this.firstCamera; }
@@ -44,7 +45,13 @@ namespace CSVWriter{
             get { return this.thirdCamera; }
             set { this.thirdCamera = value; }
         }
-        
+
+        public string LidarData
+        {
+            get { return lidarDataLoaction; }
+           
+        }
+
         public float LeftEngine
         {
             get { return this.leftEngine; }
@@ -57,11 +64,21 @@ namespace CSVWriter{
         }
         
         public void writeAdditionalData(){
-				using (var writer = new StreamWriter(lidarDataLoaction))
-    			using (var csv = new CsvWriter(writer))
-    			{
-                    csv.WriteRecords(this.lidarData);                    
-    			}
+            List<string> string_args = new List<string>();
+
+
+
+            foreach (var item in lidarData)
+            {
+                string_args.Add(item.x+","+item.y+","+item.z+",");
+            }
+
+            TextWriter tw = new StreamWriter(lidarDataLoaction);
+
+            foreach (String s in string_args)
+                tw.WriteLine(s);
+
+            tw.Close();
         }
 
         internal DataRow(byte[] fC, byte[] sC, byte[] tC,List<Vector3> lData, List<Vector2> uData,float[] engine_state )
@@ -121,7 +138,6 @@ namespace CSVWriter{
     }
      
 }
-
 
 
 
