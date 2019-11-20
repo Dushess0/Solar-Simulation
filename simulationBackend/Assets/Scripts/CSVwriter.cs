@@ -4,94 +4,44 @@ using CsvHelper;
 using System.Linq;
 using System;
 using UnityEngine;
+
 namespace CSVWriter{
-	
+   
+
     public class DataRow
     {
         private static int rowsInDataset = 0;
         // fix 
         public int rowNumber; 
-        private byte[] firstCamera ;
-        private byte[] secondCamera;
-        private byte[] thirdCamera ;
-        private List<Vector3> lidarData;
+        public  List<byte[]> Cameras;
+  
+        public  List<Vector3> lidarData;
         private List<Vector2> ultrasoundData;
 
         public string lidarDataLoaction;
         // two floats indicating state of each engine
-        private float leftEngine;  
-        private float rightEngine;
+        public float[] EnginesData;
 
         
-        
-		public static void Main(){
-			 Console.WriteLine("DataRow");
-		}
-
-		
-        public byte[] FirstCamera
-		{
- 			 get { return this.firstCamera; }
-  			 set { this.firstCamera = value; }
-		}
-      
-        public byte[] SecondCamera
-        {
-            get { return this.firstCamera; }
-            set { this.secondCamera = value; }
-        }
-        public byte[] ThirdCamera
-        {
-            get { return this.thirdCamera; }
-            set { this.thirdCamera = value; }
-        }
-
-        public string LidarData
+  
+        public string FolderName
         {
             get { return lidarDataLoaction; }
            
         }
 
-        public float LeftEngine
-        {
-            get { return this.leftEngine; }
-            set { this.LeftEngine= value; }
-        }
-        public float RightEngine
-        {
-            get { return this.rightEngine; }
-            set { this.RightEngine= value; }
-        }
+      
         
-        public void writeAdditionalData(){
-            List<string> string_args = new List<string>();
+       
 
-
-
-            foreach (var item in lidarData)
-            {
-                string_args.Add(item.x+","+item.y+","+item.z+",");
-            }
-
-            TextWriter tw = new StreamWriter(lidarDataLoaction);
-
-            foreach (String s in string_args)
-                tw.WriteLine(s);
-
-            tw.Close();
-        }
-
-        internal DataRow(byte[] fC, byte[] sC, byte[] tC,List<Vector3> lData, List<Vector2> uData,float[] engine_state )
+        internal DataRow(List<byte[]> Cameras,List<Vector3> lData, List<Vector2> uData,float[] engine_state )
         {
             DataRow.rowsInDataset += 1;
-            this.rowNumber = rowsInDataset; 
-            this.firstCamera = fC;
-            this.secondCamera = sC;
-            this.thirdCamera = tC;
+            this.rowNumber = rowsInDataset;
+            this.Cameras = Cameras;
             lidarData = lData;
             ultrasoundData = uData;
-            this.leftEngine = engine_state[0];
-			this.rightEngine = engine_state[1];
+            this.EnginesData = engine_state;
         }        
     };
 
@@ -112,28 +62,45 @@ namespace CSVWriter{
                 Console.WriteLine("The directory was created successfully ");
             }
         }
-			
+	
         public void write()
         {
-            // fill location of lidar data
-                foreach (DataRow row in records)
+            
+            string formatted_data = "";
+
+            string csv_format_row = "";
+
+            foreach( DataRow row in records)
+            {
+                csv_format_row += "[";
+                foreach (var item in row.Cameras)
                 {
-                    row.lidarDataLoaction = lidarDirectory + "/lidar_data_" + row.rowNumber.ToString() + ".csv";
-                    row.writeAdditionalData();
-                }                
-				using (var writer = new StreamWriter(csvFileName))
-    			using (var csv = new CsvWriter(writer))
-    			{
-                    csv.WriteRecords(records);                    
-    			}
+                    
+                    csv_format_row += System.Text.Encoding.UTF8.GetString(item) +",";
+                    
+                }
+                csv_format_row += "],";
+                csv_format_row += LidarSensor.VectorsToString(row.lidarData)+",";
+                formatted_data += csv_format_row + "\n";
+                csv_format_row = "";
+            }
+
+            TextWriter tw = new StreamWriter(csvFileName);
+            tw.WriteLine(formatted_data);
+
+            tw.Close();
+
+
+
 
             Debug.Log("Succesfully saved training data");
 
         }
 
-        public void addRecord(byte[] fC, byte[] sC, byte[] tC,List<Vector3> lData, List<Vector2> uData,float[] eng_data)
+        public void addRecord(List<byte[]> Cameras,List<Vector3> lData, List<Vector2> uData,float[] eng_data)
         { 
-            records.Add(new DataRow(fC,sC,tC,lData,uData,eng_data)); 
+
+            records.Add(new DataRow(Cameras, lData,uData,eng_data)); 
         }
     }
      

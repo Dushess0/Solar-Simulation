@@ -34,17 +34,22 @@ public class DataRecorder : MonoBehaviour
                 
                 Debug.Log("Recording ended");
                 Recording = false;
-                Debug.Log(lidar.Data);
+                Debug.Log(lidar.CollectedData);
                 Writer writer = new Writer();
-                foreach (var item in lidar.Data)
+                List<byte[]> CameraData = new List<byte[]>();
+                CameraData.Add(new byte[4]);
+                CameraData.Add(new byte[12]);
+                CameraData.Add(new byte[8]);
+
+                foreach (var item in lidar.CollectedData)
                 {
-                    writer.addRecord(new byte[4], new byte[8], new byte[12], item, new List<Vector2>(), new float[] { 0,0});
+                    writer.addRecord(CameraData, item, new List<Vector2>(), new float[] { 0,0});
                 }
                 writer.write();
 
 
 
-                lidar.ClearData();
+                lidar.ClearCollectedData();
 
 
 

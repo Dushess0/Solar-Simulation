@@ -980,6 +980,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 512688279}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &521198972 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3028608371130482138, guid: 631f68ad8757ae74ea1b69f239c50173,
+    type: 3}
+  m_PrefabInstance: {fileID: 1002551332472460750}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &587369977
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,7 +1376,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 4.5905e-41, y: 0, z: 0, w: -4.7501708e+36}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1774,35 +1780,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 904809676}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &932057117 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3453334288907040295, guid: 631f68ad8757ae74ea1b69f239c50173,
+--- !u!20 &955288573 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3758187490811709393, guid: 631f68ad8757ae74ea1b69f239c50173,
     type: 3}
   m_PrefabInstance: {fileID: 1002551332472460750}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &932057119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932057117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b4335da4a5ccd545b34bd96f8f2ded4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  brain: {fileID: 0}
-  agentParameters:
-    agentCameras: []
-    agentRenderTextures: []
-    maxStep: 0
-    resetOnDone: 1
-    onDemandDecision: 0
-    numberOfActionsBetweenDecisions: 1
-  boat: {fileID: 1506374723}
-  Done: 0
-  Reward: 0
 --- !u!20 &963194227 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 6297115661327072966, guid: 6b82ee65c6f223744a6def0f5caa12df,
@@ -2120,12 +2103,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6518887478935331933, guid: 0794a21b518a7f04ebcefeea6e30e1dd,
     type: 3}
   m_PrefabInstance: {fileID: 1373257641}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1506374723 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1002551333675655565, guid: 631f68ad8757ae74ea1b69f239c50173,
-    type: 3}
-  m_PrefabInstance: {fileID: 1002551332472460750}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1513748907
 GameObject:
@@ -2499,6 +2476,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7238300430763792562, guid: 79fc07cea2be51142b623a3de2307b2d,
     type: 3}
   m_PrefabInstance: {fileID: 1677659796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1808969308 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7491958752573078052, guid: 631f68ad8757ae74ea1b69f239c50173,
+    type: 3}
+  m_PrefabInstance: {fileID: 1002551332472460750}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1814920517
 PrefabInstance:
@@ -3096,6 +3079,56 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
+        type: 3}
+      propertyPath: agentParameters.agentCameras.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
+        type: 3}
+      propertyPath: agentParameters.agentRenderTextures.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
+        type: 3}
+      propertyPath: brain
+      value: 
+      objectReference: {fileID: 11400000, guid: a06039830d7624446888aa7a06375798,
+        type: 2}
+    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
+        type: 3}
+      propertyPath: agentParameters.agentCameras.Array.data[0]
+      value: 
+      objectReference: {fileID: 521198972}
+    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
+        type: 3}
+      propertyPath: agentParameters.agentCameras.Array.data[1]
+      value: 
+      objectReference: {fileID: 955288573}
+    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
+        type: 3}
+      propertyPath: agentParameters.agentCameras.Array.data[2]
+      value: 
+      objectReference: {fileID: 1808969308}
+    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
+        type: 3}
+      propertyPath: agentParameters.agentRenderTextures.Array.data[0]
+      value: 
+      objectReference: {fileID: 8600000, guid: c1aea126bc86d2549be590f8e6c1a41e, type: 2}
+    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
+        type: 3}
+      propertyPath: agentParameters.agentRenderTextures.Array.data[1]
+      value: 
+      objectReference: {fileID: 8600000, guid: 4b9c4a20f7764cd4fa64d6d667951c56, type: 2}
+    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
+        type: 3}
+      propertyPath: agentParameters.agentRenderTextures.Array.data[2]
+      value: 
+      objectReference: {fileID: 8600000, guid: dbea2a3b8cde2d74e979dc9afb2cd43e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: agentParameters.agentCameras.Array.data[0]
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 3453334288907040295, guid: 631f68ad8757ae74ea1b69f239c50173,
         type: 3}
       propertyPath: m_Name
@@ -3156,11 +3189,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.19800001
       objectReference: {fileID: 0}
-    - target: {fileID: 1002551333675655559, guid: 631f68ad8757ae74ea1b69f239c50173,
-        type: 3}
-      propertyPath: agentParameters.agentCameras.Array.data[0]
-      value: 
-      objectReference: {fileID: 963194227}
     - target: {fileID: 2311481352999290769, guid: 631f68ad8757ae74ea1b69f239c50173,
         type: 3}
       propertyPath: m_LocalRotation.y
@@ -3211,8 +3239,7 @@ PrefabInstance:
       propertyPath: RotationSpeed
       value: 0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1002551333675655559, guid: 631f68ad8757ae74ea1b69f239c50173, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 631f68ad8757ae74ea1b69f239c50173, type: 3}
 --- !u!1001 &1600745214457988695
 PrefabInstance:
