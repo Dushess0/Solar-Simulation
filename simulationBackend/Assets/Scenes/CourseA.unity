@@ -980,12 +980,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 512688279}
   m_PrefabAsset: {fileID: 0}
---- !u!20 &521198972 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 3028608371130482138, guid: 631f68ad8757ae74ea1b69f239c50173,
-    type: 3}
-  m_PrefabInstance: {fileID: 1002551332472460750}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &587369977
 GameObject:
   m_ObjectHideFlags: 0
@@ -1780,12 +1774,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 904809676}
   m_PrefabAsset: {fileID: 0}
---- !u!20 &955288573 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 3758187490811709393, guid: 631f68ad8757ae74ea1b69f239c50173,
-    type: 3}
-  m_PrefabInstance: {fileID: 1002551332472460750}
-  m_PrefabAsset: {fileID: 0}
 --- !u!20 &963194227 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 6297115661327072966, guid: 6b82ee65c6f223744a6def0f5caa12df,
@@ -2477,12 +2465,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1677659796}
   m_PrefabAsset: {fileID: 0}
---- !u!20 &1808969308 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7491958752573078052, guid: 631f68ad8757ae74ea1b69f239c50173,
-    type: 3}
-  m_PrefabInstance: {fileID: 1002551332472460750}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1814920517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3079,52 +3061,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
-        type: 3}
-      propertyPath: agentParameters.agentCameras.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
-        type: 3}
-      propertyPath: agentParameters.agentRenderTextures.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
-        type: 3}
-      propertyPath: brain
-      value: 
-      objectReference: {fileID: 11400000, guid: a06039830d7624446888aa7a06375798,
-        type: 2}
-    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
-        type: 3}
-      propertyPath: agentParameters.agentCameras.Array.data[0]
-      value: 
-      objectReference: {fileID: 521198972}
-    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
-        type: 3}
-      propertyPath: agentParameters.agentCameras.Array.data[1]
-      value: 
-      objectReference: {fileID: 955288573}
-    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
-        type: 3}
-      propertyPath: agentParameters.agentCameras.Array.data[2]
-      value: 
-      objectReference: {fileID: 1808969308}
-    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
-        type: 3}
-      propertyPath: agentParameters.agentRenderTextures.Array.data[0]
-      value: 
-      objectReference: {fileID: 8600000, guid: c1aea126bc86d2549be590f8e6c1a41e, type: 2}
-    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
-        type: 3}
-      propertyPath: agentParameters.agentRenderTextures.Array.data[1]
-      value: 
-      objectReference: {fileID: 8600000, guid: 4b9c4a20f7764cd4fa64d6d667951c56, type: 2}
-    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
-        type: 3}
-      propertyPath: agentParameters.agentRenderTextures.Array.data[2]
-      value: 
-      objectReference: {fileID: 8600000, guid: dbea2a3b8cde2d74e979dc9afb2cd43e, type: 2}
     - target: {fileID: 0}
       propertyPath: agentParameters.agentCameras.Array.data[0]
       value: 
@@ -3134,6 +3070,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boat
       objectReference: {fileID: 0}
+    - target: {fileID: 4904894938056438616, guid: 631f68ad8757ae74ea1b69f239c50173,
+        type: 3}
+      propertyPath: brain
+      value: 
+      objectReference: {fileID: 11400000, guid: a06039830d7624446888aa7a06375798,
+        type: 2}
     - target: {fileID: 3169732392146945577, guid: 631f68ad8757ae74ea1b69f239c50173,
         type: 3}
       propertyPath: m_LocalPosition.x

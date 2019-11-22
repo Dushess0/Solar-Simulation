@@ -24,46 +24,29 @@ public class LidarSensor: MonoBehaviour
 
     Ray[] LaserRays;
     float[] LaserAngles;
-   
-
-    
-
-
     [Tooltip("Enable rays and hits in editor but disable collecting data !!!! ")]
     public bool Debugging;
     public float  Magnitude;
 
 
-    List<Vector3> actualdata;
-    List<List<Vector3>> Data;
+    float StepConstant=0.05f;
+  
 
-    public List<Vector3> ActualData { get=> actualdata; }
-    public List<List<Vector3>> CollectedData { get => Data; }
-
-
-    public bool Recording = false;
-
-    void FixedUpdate()
+   public  void Step() // rotate base and update position of lasers
     {
         
-        this.transform.Rotate(0, Time.fixedDeltaTime * RotationSpeed*360, 0,Space.Self);
+        this.transform.Rotate(0, StepConstant * RotationSpeed*360, 0,Space.Self);
         UpdateRays();
-      
-        if (Recording)
-            RecordCollisions();
 
-
+       
     }
-    public void ClearCollectedData()
-    {
-        Data.Clear();
-    }
+    
 
     void Awake()
     {
-        Data = new List<List<Vector3>>();      
+       
         LaserRays = new Ray[LasersCount];
-        actualdata = new List<Vector3>();
+        
         LaserAngles = new float[LasersCount];
         for (int i = 0; i < LasersCount; i++)
         {
@@ -91,11 +74,12 @@ public class LidarSensor: MonoBehaviour
         
        
     }
-    void RecordCollisions()
+
+    //get data about collisions from lasers
+    public List<Vector3> CastLasers() 
     {
 
         List<Vector3> row = new List<Vector3>();
-
 
         for (int i = 0; i < LasersCount; i++)
         {
@@ -115,23 +99,12 @@ public class LidarSensor: MonoBehaviour
             }
 
         }
-        Data.Add(row);
+
+        return row;
 
 
     }
    
-
-    public static string VectorsToString(List<Vector3> data)
-    {
-        string row="[";
-        foreach (var item in data)
-        {
-            row += "[" + item.x + "," + item.y + "," + item.z + "],";
-        }
-        row += "]";
-        return row;
-    }
- 
 
     void OnDrawGizmosSelected()
     {

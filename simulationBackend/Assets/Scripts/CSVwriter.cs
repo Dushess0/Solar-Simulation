@@ -4,44 +4,52 @@ using CsvHelper;
 using System.Linq;
 using System;
 using UnityEngine;
-
-namespace CSVWriter{
+using Google.Protobuf;
+namespace CSVWriter
+{
    
+
+    public class Converter
+    {
+
+        public static string VectorsToString(List<Vector3> vectors)
+        {
+            string row = "[";
+
+            foreach (var item in vectors)
+            {
+                row += "["+item.x+"," + item.y + "," + item.z + "],";
+
+            }
+            row.Remove(row.Length - 1);
+            row += "]";
+
+            return row;
+        }
+
+    }
 
     public class DataRow
     {
-        private static int rowsInDataset = 0;
-        // fix 
-        public int rowNumber; 
-        public  List<byte[]> Cameras;
+        
+        
+       
+        public  ByteString[] Cameras;
   
         public  List<Vector3> lidarData;
-        private List<Vector2> ultrasoundData;
+        private float[] ultrasoundData;
 
-        public string lidarDataLoaction;
+     
         // two floats indicating state of each engine
         public float[] EnginesData;
 
-        
-  
-        public string FolderName
+        internal DataRow(ByteString[] Cameras,List<Vector3> lData, float[] uData)
         {
-            get { return lidarDataLoaction; }
            
-        }
-
-      
-        
-       
-
-        internal DataRow(List<byte[]> Cameras,List<Vector3> lData, List<Vector2> uData,float[] engine_state )
-        {
-            DataRow.rowsInDataset += 1;
-            this.rowNumber = rowsInDataset;
             this.Cameras = Cameras;
             lidarData = lData;
             ultrasoundData = uData;
-            this.EnginesData = engine_state;
+           
         }        
     };
 
@@ -68,21 +76,23 @@ namespace CSVWriter{
             
             string formatted_data = "";
 
-            string csv_format_row = "";
-
             foreach( DataRow row in records)
             {
-                csv_format_row += "[";
+                string csv_format_row = "[";
+
+                
                 foreach (var item in row.Cameras)
                 {
-                    
-                    csv_format_row += System.Text.Encoding.UTF8.GetString(item) +",";
+
+                    csv_format_row += item.ToStringUtf8();
                     
                 }
                 csv_format_row += "],";
-                csv_format_row += LidarSensor.VectorsToString(row.lidarData)+",";
+
+
+                csv_format_row += Converter.VectorsToString(row.lidarData);
                 formatted_data += csv_format_row + "\n";
-                csv_format_row = "";
+               
             }
 
             TextWriter tw = new StreamWriter(csvFileName);
@@ -97,10 +107,10 @@ namespace CSVWriter{
 
         }
 
-        public void addRecord(List<byte[]> Cameras,List<Vector3> lData, List<Vector2> uData,float[] eng_data)
+        public void addRecord(ByteString[] CamerasImages,List<Vector3> LidarData, float[] UltraSoundData)
         { 
 
-            records.Add(new DataRow(Cameras, lData,uData,eng_data)); 
+            records.Add(new DataRow(CamerasImages, LidarData, UltraSoundData)); 
         }
     }
      
