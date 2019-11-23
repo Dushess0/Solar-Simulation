@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CSVWriter;
 
 
 
-
-
-public class LidarSensor : MonoBehaviour
+public class LidarSensor: MonoBehaviour
 {
     
     public int LasersCount;
@@ -25,33 +24,29 @@ public class LidarSensor : MonoBehaviour
 
     Ray[] LaserRays;
     float[] LaserAngles;
-    public List<List<Vector3>> Data;
     [Tooltip("Enable rays and hits in editor but disable collecting data !!!! ")]
     public bool Debugging;
     public float  Magnitude;
 
 
-    public bool Recording = false;
+    float StepConstant=0.05f;
+  
 
-    void FixedUpdate()
+   public  void Step() // rotate base and update position of lasers
     {
         
-        this.transform.Rotate(0, Time.fixedDeltaTime * RotationSpeed*360, 0,Space.Self);
+        this.transform.Rotate(0, StepConstant * RotationSpeed*360, 0,Space.Self);
         UpdateRays();
-        if (Recording)
-          DetectCollisions();
 
-
+       
     }
-    public void ClearData()
-    {
-        Data.Clear();
-    }
+    
 
     void Awake()
     {
-        Data = new List<List<Vector3>>();      
+       
         LaserRays = new Ray[LasersCount];
+        
         LaserAngles = new float[LasersCount];
         for (int i = 0; i < LasersCount; i++)
         {
@@ -79,32 +74,37 @@ public class LidarSensor : MonoBehaviour
         
        
     }
-    void DetectCollisions()
+
+    //get data about collisions from lasers
+    public List<Vector3> CastLasers() 
     {
+
         List<Vector3> row = new List<Vector3>();
-        
+
         for (int i = 0; i < LasersCount; i++)
         {
             RaycastHit hit;
-           
-            if (Physics.Raycast(LaserRays[i],out hit,Magnitude)) //4 is layer mask, 4 is used for water
+
+            if (Physics.Raycast(LaserRays[i], out hit, Magnitude)) //4 is layer mask, 4 is used for water
             {
-                row.Add(LaserRays[i].direction*Magnitude);
-                
-                
+                row.Add(LaserRays[i].direction * Magnitude);
+
+
                 Debug.DrawLine(LaserRays[i].origin, LaserRays[i].origin + LaserRays[i].direction * Magnitude, Color.red);
-            }     
+            }
             else
             {
                 Debug.DrawLine(LaserRays[i].origin, LaserRays[i].origin + LaserRays[i].direction * Magnitude, Color.green);
                 row.Add(Vector3.zero);
             }
-                
+
         }
-        Data.Add(row);
-        
-        
+
+        return row;
+
+
     }
+   
 
     void OnDrawGizmosSelected()
     {
@@ -112,7 +112,7 @@ public class LidarSensor : MonoBehaviour
         {
             Awake();
             UpdateRays();
-            DetectCollisions();
+            
             Gizmos.color = Color.red;
 
 

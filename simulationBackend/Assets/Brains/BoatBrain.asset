@@ -13,11 +13,22 @@ MonoBehaviour:
   m_Name: BoatBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 1
+    vectorObservationSize: 46
     numStackedVectorObservations: 1
-    vectorActionSize: 01000000
-    cameraResolutions: []
-    vectorActionDescriptions: []
-    vectorActionSpaceType: 0
+    vectorActionSize: 02000000
+    cameraResolutions:
+    - width: 84
+      height: 84
+      blackAndWhite: 0
+    - width: 84
+      height: 84
+      blackAndWhite: 0
+    - width: 84
+      height: 84
+      blackAndWhite: 0
+    vectorActionDescriptions:
+    - Left Engine
+    - Right Engine
+    vectorActionSpaceType: 1
   model: {fileID: 0}
   inferenceDevice: 1
