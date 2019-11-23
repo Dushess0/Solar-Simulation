@@ -5,8 +5,8 @@ Simulation for training neural network.
 1) ~~Lidar Simulation~~
 2) ~~Exporting Data from Lidar~~
 3) ~~Exporting images from cameras~~
-4) WIP Python integration testing
-5) ROS# integration
+4)  ~~Python integration testing~~
+5) WIP ROS# integration
 5) Polishing physics and collisions
 6) To be defined...
 
