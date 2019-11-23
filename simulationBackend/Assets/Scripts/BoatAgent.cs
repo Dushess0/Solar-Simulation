@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MLAgents;
+using System.Net.Sockets;
 public class BoatAgent : Agent
 {
     public GameObject boat;
@@ -18,6 +19,9 @@ public class BoatAgent : Agent
 
     public float timer = 0;
 
+    SocketCommunicator communicator;
+    
+        
 
     void Start()
     {
@@ -25,6 +29,9 @@ public class BoatAgent : Agent
         Rbody = boat.GetComponent<Rigidbody>();
         recorder = GetComponent<DataRecorder>();
         this.brain.brainParameters.vectorObservationSize = 4 + recorder.lidar.LasersCount * 3 + recorder.UltraSoundSensors.Length;
+        CommunicatorParameters parameters = new CommunicatorParameters();
+        parameters.port = 40000;
+        communicator = new SocketCommunicator(parameters);
         
         Reward = 0;
        
@@ -55,12 +62,12 @@ public class BoatAgent : Agent
         Rbody.velocity = Vector3.zero;
         recorder.ClearRecordings();
         timer = 0;
+        Debug.Log("kurwa ale ja ci wpierdole");
 
-   }
+    }
     
     public override void AgentAction(float[] vectorAction, string textAction)
     {
-
 
 
         LeftEngine.Control = vectorAction[0];
