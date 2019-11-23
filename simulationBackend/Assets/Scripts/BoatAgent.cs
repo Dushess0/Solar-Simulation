@@ -16,6 +16,7 @@ public class BoatAgent : Agent
 
     DataRecorder recorder;
 
+    public float timer = 0;
 
 
     void Start()
@@ -53,7 +54,7 @@ public class BoatAgent : Agent
         gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         Rbody.velocity = Vector3.zero;
         recorder.ClearRecordings();
-
+        timer = 0;
 
    }
     
@@ -66,7 +67,12 @@ public class BoatAgent : Agent
         RightEngine.Control = vectorAction[1];
         LeftEngine.Step();
         RightEngine.Step();
-
+        timer += Time.fixedDeltaTime;
+        if (timer>10)
+        {
+            Done();
+            timer = 0;
+        }
         
         
         
