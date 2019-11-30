@@ -26,7 +26,7 @@ namespace RosSharp.RosBridgeClient
         public string FrameId = "Camera";
         public int resolutionWidth = 640;
         public int resolutionHeight = 480;
-        [Range(0, 100)]
+        [Range(0, 100)] 
         public int qualityLevel = 50;
 
         private MessageTypes.Sensor.CompressedImage message;
