@@ -32,7 +32,7 @@ public class LidarSensor: MonoBehaviour
     float StepConstant=0.05f;
   
 
-   public  void Step() // rotate base and update position of lasers
+   public  void Rotate() // rotate base and update position of lasers
     {
         
         this.transform.Rotate(0, StepConstant * RotationSpeed*360, 0,Space.Self);
@@ -111,6 +111,7 @@ public class LidarSensor: MonoBehaviour
         if (Debugging)
         {
             Awake();
+            
             UpdateRays();
             
             Gizmos.color = Color.red;

@@ -26,6 +26,20 @@ namespace CSVWriter
 
             return row;
         }
+        public static string FloatsToString(List<float> floats)
+        {
+            string row = "[";
+
+            foreach (var item in floats)
+            {
+                row += item+",";
+
+            }
+            row.Remove(row.Length - 1);
+            row += "]";
+
+            return row;
+        }
 
     }
 
@@ -34,16 +48,16 @@ namespace CSVWriter
         
         
        
-        public  ByteString[] Cameras;
+        public  Texture2D[] Cameras;
   
         public  List<Vector3> lidarData;
-        private float[] ultrasoundData;
+        public  List<float> ultrasoundData;
 
      
         // two floats indicating state of each engine
         public float[] EnginesData;
 
-        internal DataRow(ByteString[] Cameras,List<Vector3> lData, float[] uData)
+        internal DataRow(Texture2D[] Cameras,List<Vector3> lData, List<float> uData)
         {
            
             this.Cameras = Cameras;
@@ -55,19 +69,17 @@ namespace CSVWriter
 
     public class Writer
     {
-        private string lidarDirectory = "lidar_data";
-        private string csvFileName = "data_set.csv";
+        private string SavingDirectory = "Records";
+        
 
         private List<DataRow> records = new List<DataRow>();
-		internal Writer(){
-            if (Directory.Exists(lidarDirectory)) 
+		public Writer()
+        {
+            if (!Directory.Exists(SavingDirectory))
             {
-                Console.WriteLine("That path exists already.");
-            }
-            else
-            {
-                Directory.CreateDirectory(lidarDirectory);
-                Console.WriteLine("The directory was created successfully ");
+                Directory.CreateDirectory(SavingDirectory);
+                Debug.Log("Created new dir");
+
             }
         }
 	
@@ -75,27 +87,55 @@ namespace CSVWriter
         {
             
             string formatted_data = "";
+            int i = 0;
+            DateTime dateTime = DateTime.Now;
+            string date=dateTime.Hour+"-"+dateTime.Minute+"-"+dateTime.Second;
+            Debug.Log(date);
+            string currentdir = SavingDirectory + "/" + date;
+            Directory.CreateDirectory(currentdir);
+            
 
-            foreach( DataRow row in records)
+
+            List<string> img_dirs=new List<string>();
+            for (int j=0;j<this.records[0].Cameras.Length;j++)
             {
-                string csv_format_row = "[";
+                img_dirs.Add(currentdir + "/" + "camera_" + j + "_images");
+                Directory.CreateDirectory(img_dirs[j]);
+            }
+
+            
+          
+            foreach ( DataRow row in records)
+            {
+                string csv_format_row = "";
 
                 
-                foreach (var item in row.Cameras)
-                {
-
-                    csv_format_row += item.ToStringUtf8();
-                    
-                }
-                csv_format_row += "],";
+                
+                
 
 
                 csv_format_row += Converter.VectorsToString(row.lidarData);
-                formatted_data += csv_format_row + "\n";
-               
-            }
+                csv_format_row= csv_format_row.Remove(csv_format_row.Length - 2, 1);
+                
+                
+                csv_format_row += ",";
+                csv_format_row += Converter.FloatsToString(row.ultrasoundData);
 
-            TextWriter tw = new StreamWriter(csvFileName);
+                formatted_data += csv_format_row + "\n";
+                int id = 0;
+                foreach (var texture in row.Cameras)
+                {
+                    
+                    byte[] _bytes = texture.EncodeToPNG();
+                    System.IO.File.WriteAllBytes(img_dirs[id]+"/"+ i.ToString()+".png", _bytes);
+                    id++;
+
+                }
+                id = 0;
+                i++;
+            }
+           
+            TextWriter tw = new StreamWriter(currentdir+"/"+ date+".csv");
             tw.WriteLine(formatted_data);
 
             tw.Close();
@@ -107,7 +147,7 @@ namespace CSVWriter
 
         }
 
-        public void addRecord(ByteString[] CamerasImages,List<Vector3> LidarData, float[] UltraSoundData)
+        public void addRecord(Texture2D[] CamerasImages,List<Vector3> LidarData, List<float> UltraSoundData)
         { 
 
             records.Add(new DataRow(CamerasImages, LidarData, UltraSoundData)); 

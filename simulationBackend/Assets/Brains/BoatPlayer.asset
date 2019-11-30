@@ -17,14 +17,14 @@ MonoBehaviour:
     numStackedVectorObservations: 1
     vectorActionSize: 02000000
     cameraResolutions:
-    - width: 84
-      height: 84
+    - width: 80
+      height: 80
       blackAndWhite: 0
-    - width: 84
-      height: 84
+    - width: 80
+      height: 80
       blackAndWhite: 0
-    - width: 84
-      height: 84
+    - width: 80
+      height: 80
       blackAndWhite: 0
     vectorActionDescriptions:
     - 

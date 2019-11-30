@@ -14,14 +14,16 @@ public class DataRecorder : MonoBehaviour
     
     List<List<Vector3>> LidarData;
 
-    List<ByteString[]> CamerasData;
+    List<Texture2D[]> CamerasData;
     
-    List<float[]> UltraSoundData;
+    List<List<float>> UltraSoundData;
 
-    public float[] currentUltraSound;
+    [HideInInspector]
+    public List<float> currentUltraSound;
+    [HideInInspector]
     public Vector3[] currentLidar;
    
-
+    [HideInInspector]
     public int rows;
 
     
@@ -34,32 +36,32 @@ public class DataRecorder : MonoBehaviour
         Debug.Log(UltraSoundSensors.Length);
 
         LidarData = new List<List<Vector3>>();
-        UltraSoundData = new List<float[]>();
-        CamerasData = new List<ByteString[]>();
+        UltraSoundData = new List<List<float>>();
+        CamerasData = new List<Texture2D[]>();
     }
 
     // Update is called once per frame
     public void Record()
     {
-        lidar.Step();
+        lidar.Rotate();
         LidarData.Add(lidar.CastLasers());
 
-      
 
-        ByteString[] cameras_images = new ByteString[Cameras.Length];
+
+        Texture2D[] cameras_images = new Texture2D[Cameras.Length];
         for (int i = 0; i < Cameras.Length; i++)
         {
             cameras_images[i] = Cameras[i].Capture();
         }
         CamerasData.Add(cameras_images);
 
-        float[] distancies = new float[UltraSoundSensors.Length];
+        List<float> distancies = new List<float>();
         for (int i = 0; i < UltraSoundSensors.Length; i++)
         {
             UltraSoundSensors[i].UpdateRay();
-            distancies[i] = UltraSoundSensors[i].GetDistance();
+            distancies.Add(UltraSoundSensors[i].GetDistance());
         }
-
+        UltraSoundData.Add(distancies);
         currentLidar = LidarData[rows].ToArray<Vector3>();
         currentUltraSound = distancies;
 
@@ -68,6 +70,7 @@ public class DataRecorder : MonoBehaviour
 
     
     }
+   
 
     public void ClearRecordings()
     {
@@ -77,6 +80,7 @@ public class DataRecorder : MonoBehaviour
         rows = 0;
 
     }
+    
     void SaveRecordings()
     {
         Writer writer = new Writer();
@@ -84,6 +88,12 @@ public class DataRecorder : MonoBehaviour
         {
             writer.addRecord(CamerasData[i], LidarData[i], UltraSoundData[i]);
         }
-
+        writer.write();
+        
+        
+    } 
+    void OnDestroy()
+    {
+        this.SaveRecordings();
     }
 }

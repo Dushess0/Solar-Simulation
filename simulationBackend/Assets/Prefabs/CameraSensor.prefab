@@ -98,7 +98,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   captureWidth: 720
   captureHeight: 720
-  renderTexture: {fileID: 0}
 --- !u!1 &4480438574050660132
 GameObject:
   m_ObjectHideFlags: 0

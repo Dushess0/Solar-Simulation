@@ -28,10 +28,8 @@ public class BoatAgent : Agent
         StartPos = boat.transform.position;
         Rbody = boat.GetComponent<Rigidbody>();
         recorder = GetComponent<DataRecorder>();
-        this.brain.brainParameters.vectorObservationSize = 4 + recorder.lidar.LasersCount * 3 + recorder.UltraSoundSensors.Length;
-        CommunicatorParameters parameters = new CommunicatorParameters();
-        parameters.port = 40000;
-        communicator = new SocketCommunicator(parameters);
+        
+       
         
         Reward = 0;
        
@@ -62,7 +60,7 @@ public class BoatAgent : Agent
         Rbody.velocity = Vector3.zero;
         recorder.ClearRecordings();
         timer = 0;
-        Debug.Log("kurwa ale ja ci wpierdole");
+        
 
     }
     
@@ -74,6 +72,7 @@ public class BoatAgent : Agent
         RightEngine.Control = vectorAction[1];
         LeftEngine.Step();
         RightEngine.Step();
+        
         timer += Time.fixedDeltaTime;
         if (timer>10)
         {

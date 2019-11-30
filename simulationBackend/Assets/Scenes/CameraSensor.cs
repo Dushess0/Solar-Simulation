@@ -18,10 +18,10 @@ public class CameraSensor : MonoBehaviour
     {  
         cam = GetComponent<Camera>();
     }
-    public ByteString Capture()
+    public Texture2D Capture()
     {
-       Texture2D current_image= Agent.ObservationToTexture(cam, captureWidth, captureHeight);
-       return ByteString.CopyFrom(current_image.EncodeToPNG());
+   
+        return Agent.ObservationToTexture(cam, captureWidth, captureHeight);
 
     }
    

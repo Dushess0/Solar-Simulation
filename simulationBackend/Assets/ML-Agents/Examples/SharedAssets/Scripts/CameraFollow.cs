@@ -16,10 +16,9 @@ namespace MLAgents
         // Update is called once per frame
         void Update()
         {
-            // gameObject.transform.position = target.position + offset;
-            var newPosition = new Vector3(target.position.x + m_Offset.x, transform.position.y,
-                target.position.z + m_Offset.z);
-            gameObject.transform.position = newPosition;
+
+            Debug.Log(target.transform.position);
+            transform.position = target.position + m_Offset;
         }
     }
 }
