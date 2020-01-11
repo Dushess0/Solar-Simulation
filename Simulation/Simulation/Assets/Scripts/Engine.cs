@@ -15,6 +15,7 @@ public class Engine : MonoBehaviour
     }
     public void Step()
     {
+        if (Mathf.Abs(Control) > 1) Control = 1;
         rBody.AddRelativeForce(new Vector3(0, 0, -Control * MaxPower));
     }
   

@@ -14,10 +14,10 @@ public class BoatAgent : Agent
     Engine RightEngine;
     
     public float Reward;
-
+    public float[] nextaction;
     DataRecorder recorder;
 
-    public float timer = 0;
+    
 
     SocketCommunicator communicator;
     
@@ -28,8 +28,8 @@ public class BoatAgent : Agent
         StartPos = boat.transform.position;
         Rbody = boat.GetComponent<Rigidbody>();
         recorder = GetComponent<DataRecorder>();
-        this.brain.brainParameters.vectorObservationSize = recorder.currentLidar.Length * 3 + recorder.currentUltraSound.Count+6;
-        this.brain.brainParameters.vectorObservationSize = recorder.lidar.LasersCount * 3 + 7 + recorder.UltraSoundSensors.Length;
+        nextaction = new float[2];
+        
 
         Reward = 0;
        
@@ -40,19 +40,17 @@ public class BoatAgent : Agent
         
         AddVectorObs(gameObject.transform.rotation);
         AddVectorObs(gameObject.transform.position);
-        foreach (var item in recorder.currentUltraSound)
+
+
+       
+        foreach (var item in recorder.currentLidar())
         {
             AddVectorObs(item);
         }
-        foreach (var item in recorder.currentLidar)
+        foreach (var item in recorder.currentUltrasound())
         {
             AddVectorObs(item);
         }
-
-
-
-
-
 
     }
     public override void AgentReset()
@@ -60,38 +58,20 @@ public class BoatAgent : Agent
         gameObject.transform.position = StartPos;
         gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         Rbody.velocity = Vector3.zero;
-        recorder.ClearRecordings();
-        timer = 0;
-        
-
+        recorder.ClearRecordings();     
+        recorder.lidar.transform.rotation= new Quaternion(0, 0, 0, 0);
     }
-    
-    public override void AgentAction(float[] vectorAction, string textAction)
+    public void Action(float[] vectorAction, string textAction)
     {
-
-
         LeftEngine.Control = vectorAction[0];
         RightEngine.Control = vectorAction[1];
         LeftEngine.Step();
         RightEngine.Step();
-        
-        timer += Time.fixedDeltaTime;
-        if (timer>10)
-        {
-            Done();
-            timer = 0;
-        }
-        
-        
-        
-
-       
-
-        // if collide bouy then reward = -0.1f  
-        //need to specify cost of time and cost of 
-
+        recorder.lidar.Rotate();
     }
-
-
-
+    
+    public override void AgentAction(float[] vectorAction, string textAction)
+    {
+       // Action(nextaction, textAction);
+    }
 }

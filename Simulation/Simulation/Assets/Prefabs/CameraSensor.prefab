@@ -95,8 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d06d17c04021114eb071d7fecbf9588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  captureWidth: 720
-  captureHeight: 720
+  captureWidth: 1920
+  captureHeight: 1080
 --- !u!1 &4480438574050660132
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ namespace MLAgents
         void Update()
         {
 
-            Debug.Log(target.transform.position);
+     
             transform.position = target.position + m_Offset;
         }
     }

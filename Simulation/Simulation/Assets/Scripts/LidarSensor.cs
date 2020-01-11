@@ -29,7 +29,7 @@ public class LidarSensor: MonoBehaviour
     public float  Magnitude=15;
 
 
-    float StepConstant=0.05f;
+    float StepConstant=0.025f;
   
 
    public  void Rotate() // rotate base and update position of lasers

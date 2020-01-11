@@ -18,22 +18,20 @@ public class DataRecorder : MonoBehaviour
     
     List<List<float>> UltraSoundData;
 
-    [HideInInspector]
-    public List<float> currentUltraSound;
-    [HideInInspector]
-    public Vector3[] currentLidar;
+   
    
     [HideInInspector]
     public int rows;
-
+    public float WriteFrequency = 0.02f;
+    private  float timer = 0;
     
     // Start is called before the first frame update
     void Awake()
     {
         rows = 0;
-        
+        timer = 0;
         UltraSoundSensors = GetComponentsInChildren<DistanceSensor>();
-        Debug.Log(UltraSoundSensors.Length);
+        
 
         LidarData = new List<List<Vector3>>();
         UltraSoundData = new List<List<float>>();
@@ -41,36 +39,56 @@ public class DataRecorder : MonoBehaviour
     }
 
     // Update is called once per frame
+
+   
+   
+  
     public void Record()
     {
-        lidar.Rotate();
-        LidarData.Add(lidar.CastLasers());
 
+        timer += Time.fixedDeltaTime;
+        if (!lidar.Debugging)
+        {
+            Debug.Log("wtf");
+            if (timer >= WriteFrequency)
+            {
+                this.LidarData.Add(currentLidar());
+                this.UltraSoundData.Add(currentUltrasound());
+                this.CamerasData.Add(currentImages());
 
+                rows++;
+                timer = 0;
+            }               
+        }
+       
 
+    }
+    public Texture2D[] currentImages()
+    {
         Texture2D[] cameras_images = new Texture2D[Cameras.Length];
         for (int i = 0; i < Cameras.Length; i++)
         {
             cameras_images[i] = Cameras[i].Capture();
         }
-        CamerasData.Add(cameras_images);
-
+        return cameras_images;
+    }
+    public List<float> currentUltrasound()
+    {
         List<float> distancies = new List<float>();
         for (int i = 0; i < UltraSoundSensors.Length; i++)
         {
             UltraSoundSensors[i].UpdateRay();
             distancies.Add(UltraSoundSensors[i].GetDistance());
         }
-        UltraSoundData.Add(distancies);
-        currentLidar = LidarData[rows].ToArray<Vector3>();
-        currentUltraSound = distancies;
-
-        rows++;
-       
-
-    
+        return distancies;
     }
-   
+    public List<Vector3> currentLidar()
+    {
+        lidar.Rotate();
+        return lidar.CastLasers();
+    }
+
+
 
     public void ClearRecordings()
     {
@@ -94,6 +112,7 @@ public class DataRecorder : MonoBehaviour
     } 
     void OnDestroy()
     {
+        if (!lidar.Debugging)
         this.SaveRecordings();
     }
 }

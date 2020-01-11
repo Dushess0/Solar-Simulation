@@ -14,15 +14,13 @@ namespace CSVWriter
         public static string VectorsToString(List<Vector3> vectors)
         {
             string row = "[";
-
-            foreach (var item in vectors)
+            int i = 0;
+            for (; i < vectors.Capacity-2; i++)
             {
-                row += "["+item.x+"," + item.y + "," + item.z + "],";
-
+                row += "[" + vectors[i].x + "," + vectors[i].y + "," + vectors[i].z + "],";
             }
-            row.Remove(row.Length - 1);
+            row += "[" + vectors[i].x + "," + vectors[i].y + "," + vectors[i].z + "]";
             row += "]";
-
             return row;
         }
         public static string FloatsToString(List<float> floats)
@@ -44,25 +42,17 @@ namespace CSVWriter
 
     public class DataRow
     {
-        
-        
-       
         public  Texture2D[] Cameras;
-  
         public  List<Vector3> lidarData;
         public  List<float> ultrasoundData;
-
-     
         // two floats indicating state of each engine
         public float[] EnginesData;
-
+          
         internal DataRow(Texture2D[] Cameras,List<Vector3> lData, List<float> uData)
-        {
-           
+        {         
             this.Cameras = Cameras;
             lidarData = lData;
-            ultrasoundData = uData;
-           
+            ultrasoundData = uData;           
         }        
     };
 
@@ -107,11 +97,6 @@ namespace CSVWriter
             foreach ( DataRow row in records)
             {
                 string csv_format_row = "";
-
-                
-                
-                
-
 
                 csv_format_row += Converter.VectorsToString(row.lidarData);
                 csv_format_row= csv_format_row.Remove(csv_format_row.Length - 2, 1);

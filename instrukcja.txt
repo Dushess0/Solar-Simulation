@@ -1,0 +1,21 @@
+Przykladowy plik ja uzywac symulacje w innych programach znajduje sie w Simulation/Simulation/main.py
+Przerobilem interakcje z symulacja, teraz jest na podstawie plikow, wczesniej byla zrobiona za pomoca portow(sockets).
+Byl duzy packet loss, i wolno to bylo. Najpierw uruchamia sie skrypt w pythonie, potem symulacja. 
+1) uruchamiamy skrypt w pythonie
+2) uruchamiamy symulacje
+3) skrypt mowi symulacji zresetowac level
+4) po potwierdzeniu resetowania, skrypt mowi ze gotow otrzymywac dane i symulacja sie uruchamia, robi 1 krok, aktualizuje dane, czeka na rozkaz od skryptu
+loop:
+  (1)
+  pobrac dane z lidaru (lidar.txt)
+  pobrac dane z ultradziekow (ultrasound.txt)
+  obrazy z kamer umiesciane po prostu w plikach 0.png,1.png,2.png (tak zrobilem bo jest mniej problemow z kodowaniem oraz przypadkow gdy plik byl uszkodzony przez packet loss)
+  zdecydowac zo ma zrobic lodz ( patrz skrypt w pythonie)
+  powiedziec symulacji zeby zrobila kolejny krok (2)
+  
+Kody:
+simulate="0" - uruchomic symulacje
+newdata="1"  - symulacja zaktualizowala dane, czeka na skrypt.
+action="2" - skrypt w pythonie mowi zrobic kolejny krok.
+reset="100"  - zresetowac level
+  
