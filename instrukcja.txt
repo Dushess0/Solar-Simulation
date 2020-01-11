@@ -18,6 +18,8 @@ simulate="0" - uruchomic symulacje
 newdata="1"  - symulacja zaktualizowala dane, czeka na skrypt.
 action="2" - skrypt w pythonie mowi zrobic kolejny krok.
 reset="100"  - zresetowac level
+reset="102" -unity skonczyl reset
+
 
 
 skrypt w pythonie musi znajdowac sie w katalogu gdzie sa obrazy z kamer oraz pliki actions.txt,lidar.txt,state.txt,ultrasound.txt.
