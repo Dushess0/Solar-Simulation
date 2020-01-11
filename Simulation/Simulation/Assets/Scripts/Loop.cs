@@ -2,11 +2,15 @@
 using UnityEngine;
 using CSVWriter;
 using System.IO;
+using Unity;
+using UnityEngine.SceneManagement;
 enum State
 {
     Simulate=0,
     newdata=1,
-    action=2
+    action=2,
+    reset=100,
+    done_reset=102
 }
 public class Loop : MonoBehaviour
 {
@@ -18,20 +22,55 @@ public class Loop : MonoBehaviour
     public bool paused = false;
     float[] actions;
     long iteration=0;
+
+    FileStream oStream;
+    FileStream iStream;
+    StreamWriter sw;
+    StreamReader sr;
+
+    FileStream lidar_writer;
+    FileStream ultrasound_writer;
+    FileStream[] images_writers;
     State check_state()
     {
+
         return (State)int.Parse(System.IO.File.ReadAllText("state.txt"));
 
     }
     void change_state(State newState)
     {
+
         System.IO.File.WriteAllText("state.txt", ((int)newState).ToString());
+
     }
     void Start()
     {
         this.boatAgent = Boat.GetComponent<BoatAgent>();
         this.recorder = Boat.GetComponent<DataRecorder>();
+       
         Time.timeScale = 0;
+   
+        sw = new System.IO.StreamWriter(oStream);
+        sr = new System.IO.StreamReader(iStream);
+
+       
+
+
+
+        lidar_writer = new FileStream("lidar.txt", FileMode.Create, FileAccess.Write, FileShare.Read);
+
+        ultrasound_writer = new FileStream("ultrasound.txt", FileMode.Create,FileAccess.Write,FileShare.Read);
+        images_writers=new FileStream[recorder.Cameras.Length];
+        for (int i = 0; i < recorder.Cameras.Length; i++)
+        {
+            images_writers[i] = new FileStream(i + ".png", FileMode.Create, FileAccess.Write, FileShare.Read);
+        }
+
+
+
+       
+
+
     }
   
    
@@ -46,10 +85,13 @@ public class Loop : MonoBehaviour
             for (int i = 0; i < images.Length; i++)
             {
                 byte[] _bytes = images[i].EncodeToPNG();
-                System.IO.File.WriteAllBytes(i + ".png", _bytes);
+                images_writers[i].Write(_bytes, 0, _bytes.Length);
+               
             }
-            System.IO.File.WriteAllText("lidar.txt", Converter.VectorsToString(recorder.currentLidar()));
-            System.IO.File.WriteAllText("ultrasound.txt", Converter.FloatsToString(recorder.currentUltrasound()));
+            byte[] info = new System.Text.UTF8Encoding(true).GetBytes(Converter.VectorsToString(recorder.currentLidar()));
+            lidar_writer.Write(info, 0, info.Length);
+            info = new System.Text.UTF8Encoding(true).GetBytes(Converter.FloatsToString(recorder.currentUltrasound()));
+            ultrasound_writer.Write(info, 0, info.Length);    
             Time.timeScale = 0;
             change_state(State.newdata);
             Debug.Log("waiting for action");
@@ -74,6 +116,14 @@ public class Loop : MonoBehaviour
             
 
 
+        }
+        else if(current==State.reset)
+        {
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            change_state(State.done_reset);
+
+          
         }
         Debug.Log(current);
 

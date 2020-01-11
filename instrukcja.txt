@@ -1,6 +1,6 @@
 Przykladowy plik ja uzywac symulacje w innych programach znajduje sie w Simulation/Simulation/main.py
 Przerobilem interakcje z symulacja, teraz jest na podstawie plikow, wczesniej byla zrobiona za pomoca portow(sockets).
-Byl duzy packet loss, i wolno to bylo. Najpierw uruchamia sie skrypt w pythonie, potem symulacja. 
+Byl duzy packet loss, wolno to chodzilo, oraz kodowanie obrazkow i innych bylo trudne. Najpierw uruchamia sie skrypt w pythonie, potem symulacja. 
 1) uruchamiamy skrypt w pythonie
 2) uruchamiamy symulacje
 3) skrypt mowi symulacji zresetowac level
@@ -18,4 +18,10 @@ simulate="0" - uruchomic symulacje
 newdata="1"  - symulacja zaktualizowala dane, czeka na skrypt.
 action="2" - skrypt w pythonie mowi zrobic kolejny krok.
 reset="100"  - zresetowac level
+
+
+skrypt w pythonie musi znajdowac sie w katalogu gdzie sa obrazy z kamer oraz pliki actions.txt,lidar.txt,state.txt,ultrasound.txt.
+Komunikacja z symulacja moze byc zrobiona w kazdym innym jezyku programowanie, music byc po prostu zachowana kolejnosc wysylania kodow 
+jak w pliku Pythona.
+
   

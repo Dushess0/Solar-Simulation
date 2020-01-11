@@ -46,20 +46,20 @@ public class DataRecorder : MonoBehaviour
     public void Record()
     {
 
-        timer += Time.fixedDeltaTime;
-        if (!lidar.Debugging)
-        {
-            Debug.Log("wtf");
-            if (timer >= WriteFrequency)
-            {
-                this.LidarData.Add(currentLidar());
-                this.UltraSoundData.Add(currentUltrasound());
-                this.CamerasData.Add(currentImages());
+        //timer += Time.fixedDeltaTime;
+        //if (!lidar.Debugging)
+        //{
+        //    Debug.Log("wtf");
+        //    if (timer >= WriteFrequency)
+        //    {
+        //        this.LidarData.Add(currentLidar());
+        //        this.UltraSoundData.Add(currentUltrasound());
+        //        this.CamerasData.Add(currentImages());
 
-                rows++;
-                timer = 0;
-            }               
-        }
+        //        rows++;
+        //        timer = 0;
+        //    }               
+        //}
        
 
     }
