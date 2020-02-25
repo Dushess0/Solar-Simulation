@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BoatPlayer
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 67
+    vectorObservationSize: 16
     numStackedVectorObservations: 1
     vectorActionSize: 02000000
     cameraResolutions:
