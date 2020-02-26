@@ -16,12 +16,12 @@ videos
 
 https://drive.google.com/open?id=1leD65BST12JN4j2X9Go2ZXeTx3TcHEah
 
-![screenshot](https://imgur.com/BEpCDMO "Some beta screenshots")
+![screenshot](https://i.imgur.com/BEpCDMO.png "Some beta screenshots")
 
-![screenshot](https://imgur.com/wgf0Kob "Some beta screenshots")
+![screenshot](https://imgur.com/wgf0Kob.png "Some beta screenshots")
 
-![screenshot](https://imgur.com/HXP36VK "Some beta screenshots")
+![screenshot](https://imgur.com/HXP36VK.png "Some beta screenshots")
 
-![screenshot](https://imgur.com/1OVTk6c "Some beta screenshots")
+![screenshot](https://imgur.com/1OVTk6c.png "Some beta screenshots")
 
-![screenshot](https://imgur.com/aY9pLYL "Some beta screenshots")
+![screenshot](https://imgur.com/aY9pLYL.png "Some beta screenshots")
