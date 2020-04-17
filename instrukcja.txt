@@ -1,6 +1,6 @@
-Przykladowy plik ja uzywac symulacje w innych programach znajduje sie w Simulation/Simulation/main.py
+Przykladowy plik jak uzywac symulacje w innych programach znajduje sie w Simulation/Simulation/main.py
 Przerobilem interakcje z symulacja, teraz jest na podstawie plikow, wczesniej byla zrobiona za pomoca portow(sockets).
-Byl duzy packet loss, wolno to chodzilo, oraz kodowanie obrazkow i innych danych bylo trudne. Najpierw uruchamia sie skrypt w pythonie, potem symulacja. 
+Byl duzy packet loss, wolno to chodzilo, oraz kodowanie obrazow i innych danych bylo trudne. Najpierw uruchamia sie skrypt w pythonie, potem symulacja. 
 1) uruchamiamy skrypt w pythonie
 2) uruchamiamy symulacje
 3) skrypt mowi symulacji zresetowac level
